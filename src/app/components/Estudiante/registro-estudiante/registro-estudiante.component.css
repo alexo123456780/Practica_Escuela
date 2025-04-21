@@ -1,0 +1,161 @@
+.text-teal-500 {
+    color: #b8147f;
+  }
+  
+  .text-teal-600 {
+    color: #940d0d;
+  }
+  
+  .text-teal-800 {
+    color: #3e115e;
+  }
+  
+  .bg-gradient-to-br {
+      background-size: 300% 300%;
+      animation: gradientAnimation 12s ease infinite;
+      background-image: linear-gradient(135deg, #d42d7e, #410ee9, #0891b2, #940d77);
+    }
+    
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    /* Animación para el mensaje de error */
+    @keyframes shakeError {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+      }
+      20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+      }
+    }
+    
+    /* Mejora de efectos hover para botones e inputs */
+    input {
+      transition: all 0.3s ease;
+    }
+    
+    input:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    input:focus {
+      box-shadow: 0 0 0 3px rgba(184, 20, 168, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    /* Efecto de elevación para el contenedor principal */
+    .shadow-2xl {
+      transition: box-shadow 0.4s ease-in-out, transform 0.4s ease-in-out;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .shadow-2xl:hover {
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+      transform: translateY(-5px);
+    }
+    
+    /* Animaciones para elementos del formulario */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Estilos para la imagen de perfil */
+    .h-24 {
+      height: 6rem;
+    }
+    
+    .w-24 {
+      width: 6rem;
+    }
+    
+    .object-cover {
+      object-fit: cover;
+    }
+    
+    /* Estilos para el botón de seleccionar imagen */
+    .bg-teal-600 {
+      background-color: #0d9488;
+    }
+    
+    .hover\:bg-teal-700:hover {
+      background-color: #0f766e;
+    }
+    
+    .focus\:ring-teal-500:focus {
+      --tw-ring-color: #14b8a6;
+    }
+    
+    .border-teal-300 {
+      border-color: #5eead4;
+    }
+    
+    .border-teal-200 {
+      border-color: #99f6e4;
+    }
+    
+    .shadow-teal-100 {
+      --tw-shadow-color: #ccfbf1;
+    }
+    
+    /* Animación para el botón de registro */
+    .transform {
+      transition-property: transform;
+    }
+    
+    .hover\:scale-\[1\.02\]:hover {
+      transform: scale(1.02);
+    }
+    
+    /* Animación para el spinner de carga */
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
