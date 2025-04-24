@@ -1,0 +1,116 @@
+<div class="contenedor-perfil">
+
+    <div class="tarjeta-principal">
+
+        <h2 class="titulo-principal">Actualiza tus datos Maestro</h2>
+
+        <div *ngIf="mensajeError" class="mensaje mensaje-error">
+
+            <span>{{mensajeError}}</span>
+        </div>
+
+
+        <div *ngIf="mensajeExito" class=" mensaje mensaje-exito">
+
+            <span>{{mensajeExito}}</span>
+        </div>
+
+
+        <form [formGroup]="formularioEditar" (ngSubmit)="mostrarModalMaestro()" class="formulario-editar">
+
+            <div class="seccion-imagen">
+
+                <div class="contenedor-imagen" [ngClass]="{'imagen': imagenPrevisualizacion}">
+
+                    <img *ngIf="imagenPrevisualizacion" [src]="imagenPrevisualizacion" alt="vista-imagen" class="imagen-preview">
+
+                    <div *ngIf="!imagenPrevisualizacion" class="placeholder-imagen">
+                        <i class="icono-usuario"></i>
+                    </div>
+
+                </div>
+
+                <label for="imagen-maestro" class="boton-subir">
+                    <span>Selecciona una foto de perfil nueva</span>
+
+                    <input type="file"
+                    id="imagen-maestro"
+                    accept="image/*"
+                    (change)="obtenerImagen($event)"
+                    class="input-perfil"
+                    >
+                </label>
+            </div>
+
+            <div class="campos-formulario">
+                <div class="campo">
+                  <label for="nombre">Nombre: </label>
+                  <input 
+                    type="text" 
+                    id="nombre" 
+                    formControlName="nombre_maestro" 
+                    placeholder="Ejemplo: Jotaro">
+                </div>
+                
+                <div class="campo">
+                  <label for="apellido">Apellido: </label>
+                  <input 
+                    type="text" 
+                    id="apellido" 
+                    formControlName="apellido" 
+                    placeholder="Ejemplo: Kujho Joestar">
+                </div>
+                
+                <div class="campo">
+                  <label for="telefono">Número de teléfono: </label>
+                  <input 
+                    type="tel" 
+                    id="telefono" 
+                    formControlName="numero_telefono" 
+                    placeholder="Ejemplo: 9995432789" 
+                    maxlength="10">
+                  <small *ngIf="formularioEditar.get('numero_telefono')?.errors?.['maxlength']" class="error-texto">
+                    El número debe tener máximo 10 dígitos
+                  </small>
+                </div>
+              </div>
+              
+              <!-- Botón de guardar -->
+              <div class="acciones">
+                <button 
+                  type="submit" 
+                  class="boton-guardar" 
+                  [disabled]="estaCargando">
+                  <span *ngIf="!estaCargando">Guardar cambios</span>
+                  <span *ngIf="estaCargando" class="cargando"></span>
+                </button>
+              </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="modal-overlay" *ngIf="mostrarModal">
+
+        <div class="modal">
+            <h3>Confirma tu actualizacion de datos</h3>
+            <p>Seguro que quieres modificar tus datos no te falto algo mas por actualizar?</p>
+
+            <div class="botones-modal">
+
+                <button class="boton-cancelar" (click)="mostrarModal= false">No Master ya me arrepenti</button>
+
+                <button class="boton-aceptar" (click)="aceptarModal()">Adelante master estoy 100% seguro</button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { EstudianteResponse } from '../interfaces/estudiante';
+import { EstudianteListaResponse, EstudianteResponse } from '../interfaces/estudiante';
 import { EstudianteCredenciales } from '../interfaces/estudiante';
 
 @Injectable({
@@ -53,6 +53,29 @@ export class EstudianteServiceService {
 
 
         return response;
+      })
+
+    )
+
+  }
+
+  obtenerEstudiantes():Observable<EstudianteListaResponse>{
+
+    return this.http.get<EstudianteListaResponse>(`${this.apiBase}/traer-alumnos`).pipe(
+
+      map(response =>{
+
+        console.log('Estudiantes obtenidos correctamente',JSON.stringify({
+
+          status:response.status,
+          message: response.message,
+          code:response.code
+
+
+        },null,2))
+
+        return response;
+
       })
 
 

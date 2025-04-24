@@ -25,6 +25,7 @@ export class RegistroEstudianteComponent {
   imagenPrevisualizacion : string | ArrayBuffer | null = null;
   imagenArchivo: File |  null = null;
   formularioAlumno: FormGroup;
+  mostrarModal: boolean = false;
 
 
   constructor(private estudianteService:EstudianteServiceService, private fb:FormBuilder, private router:Router){
@@ -121,26 +122,35 @@ export class RegistroEstudianteComponent {
           },1400)
 
         }
-
-
-
-
-
-
       })
+    }
+  }
 
+  abrirModal():void{
 
+    if(this.formularioAlumno.valid && this.imagenArchivo){
 
-
-
-
-
+      this.mostrarModal = true;
 
     }else{
 
-      this.mensajeError = 'Error al encontrar la imagen o formulario corrupto';
+      this.mensajeError = 'Completa todos los campos requeridos'
 
+      setTimeout(() =>{
+
+        this.mensajeError = '';
+
+
+      },1400)
     }
+  }
+
+
+  confirmarModal():void{
+
+    this.mostrarModal = false;
+    this.enviarRegistro();
+
   }
 
 

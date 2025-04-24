@@ -7,6 +7,11 @@ import { CursoServiceService } from '../../../services/curso-service.service';
 import { MaestroServiceService } from '../../../services/maestro-service.service';
 import { Maestro } from '../../../interfaces/maestro';
 import { Curso } from '../../../interfaces/curso';
+import { EstudianteServiceService } from '../../../services/estudiante-service.service';
+import { Estudiante } from '../../../interfaces/estudiante';
+import { TareaServiceService } from '../../../services/tarea-service.service';
+import { Tarea } from '../../../interfaces/tarea';
+
 
 
 @Component({
@@ -24,16 +29,23 @@ export class DashboardMaestroComponent implements OnInit {
   id_curso: number = 1;
   infoMaestro: Maestro | null = null;
   infoCurso: Curso | null = null;
+  cantidad_alumnos: number = 1;
+  estudiantes: Estudiante[] = [];
+  tareas:Tarea[] = [];
+  cantidad_tareas: number = 0;
 
 
 
-  constructor(private cursoService:CursoServiceService, private maestroService:MaestroServiceService, private router:Router){}
+  constructor(private cursoService:CursoServiceService, private maestroService:MaestroServiceService, private router:Router,private estudianteService:EstudianteServiceService,
+    private tareaService:TareaServiceService
+  ){}
+
 
   ngOnInit(): void {
 
     this.obtenerIdMaestroyCurso();
-    this.obtenerInfoMaestro();
-    this.obtenerInfoCurso();
+    this.obtenerInfoEstudiantes();
+    this.obtenerinfoTareas();
     
   }
 
@@ -58,17 +70,20 @@ export class DashboardMaestroComponent implements OnInit {
 
 
         },null,2));
+
+        this.obtenerInfoMaestro();
+        this.obtenerInfoCurso();
         
 
       }else{
 
         console.log('Error al buscar la informacion del maestro');
-
-
       }
 
     }
   }
+
+
 
   obtenerInfoMaestro():void{
 
@@ -107,18 +122,107 @@ export class DashboardMaestroComponent implements OnInit {
 
     this.cursoService.obtenerInfoCurso(this.id_curso).subscribe({
 
-      
+      next: (response) =>{
+
+        console.log('Informacion del curso obtenido correctamente',JSON.stringify(response.data,null,2));
+
+        this.infoCurso = response.data;
+
+        console.log('Curso:',this.infoCurso);
+
+        
+      },
+
+      error: (error) =>{
+
+        this.mensajeError = 'Ocurrio un error al buscar el curso';
+
+        console.log('Ocurrio un error al buscar la informacion del curso',JSON.stringify(error,null,2));
+
+        setTimeout(() =>{
+          this.mensajeError = '';
+
+        },1400)
 
 
-     
+      }
     })
+  }
 
 
+  cerrarSesion():void{
 
+    localStorage.removeItem('token_maestro');
+    localStorage.removeItem('maestro');
 
+    console.log('Sesion cerrada correctamente');
 
 
   }
+
+
+  obtenerInfoEstudiantes():void{
+
+    this.estudianteService.obtenerEstudiantes().subscribe({
+
+      next: (response) =>{
+
+        console.log('Informacion de todos los estudiantes obtenida correctamente',JSON.stringify(response.data,null,2));
+
+        this.estudiantes = [...response.data]
+
+        console.log('Estudiante:',this.estudiantes);
+
+        this.cantidad_alumnos = response.data.length;
+
+
+      },
+
+      error: (error) =>{
+
+        console.log('Error en la api:',JSON.stringify(error,null,2));
+
+        
+
+
+      }
+    })
+  }
+
+  obtenerinfoTareas():void{
+
+    this.tareaService.obtenerTareasdelCurso(this.id_curso).subscribe({
+
+      next: (response) =>{
+
+        console.log('Tareas del curso obtenidas correctamente');
+
+        this.tareas = [...response.data];
+        this.cantidad_tareas = response.data.length;
+
+        console.log('Tareas:',this.tareas);
+
+      },
+
+      error: (error) =>{
+
+        console.log('Error al obtener las taras del curso',JSON.stringify(error,null,2));
+
+      }
+
+    })
+  }
+
+  rutaCrearTarea():void{
+    this.router.navigate(['/crear-tarea']);
+  }
+
+
+
+
+
+
+
 
 
 

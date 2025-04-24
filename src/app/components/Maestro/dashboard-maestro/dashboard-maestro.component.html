@@ -1,1 +1,136 @@
-<p>dashboard-maestro works!</p>
+<div class="contenedor-principal">
+  <header class="cabecera">
+    <div class="logo-contenedor">
+      <h1 class="titulo-app">Escuela<span>Virtual</span></h1>
+    </div>
+    <div class="perfil-usuario">
+      <button class="boton-cerrar-sesion" (click)="cerrarSesion()" routerLink="/login-maestro">
+        <i class="icono-salir">↪</i> Cerrar Sesión
+      </button>
+    </div>
+  </header>
+
+  <!-- Mensaje de error o éxito -->
+  <div class="contenedor-mensajes">
+    <div *ngIf="mensajeError" class="mensaje mensaje-error">
+      {{ mensajeError }}
+    </div>
+    <div *ngIf="mensajeExito" class="mensaje mensaje-exito">
+      {{ mensajeExito }}
+    </div>
+  </div>
+
+  <!-- Contenido principal del dashboard -->
+  <main class="contenido-principal">
+    <!-- Panel lateral con información del maestro -->
+    <aside class="panel-lateral">
+      <div class="tarjeta-perfil">
+        <!-- Foto del maestro -->
+        <div class="contenedor-foto">
+          <img *ngIf="infoMaestro?.perfil_maestro" [src]="infoMaestro?.perfil_maestro" alt="Foto de perfil" class="foto-perfil">
+          <div *ngIf="!infoMaestro?.perfil_maestro" class="foto-perfil-placeholder">
+            {{ infoMaestro?.nombre_maestro?.charAt(0) }}{{ infoMaestro?.apellido?.charAt(0) }}
+          </div>
+        </div>
+        
+        <!-- Información del maestro -->
+        <div class="info-maestro">
+          <h2 class="nombre-maestro">{{ infoMaestro?.nombre_maestro }} {{ infoMaestro?.apellido }}</h2>
+          <p class="matricula-maestro">Matrícula: {{ infoMaestro?.matricula }}</p>
+          <p class="telefono-maestro">Teléfono: {{ infoMaestro?.numero_telefono }}</p>
+        </div>
+      </div>
+
+
+    
+      <!-- Menú de navegación -->
+      
+    </aside>
+
+    <!-- Sección principal con información del curso -->
+    <section class="seccion-curso">
+      <h2 class="titulo-seccion">Información del Curso</h2>
+      
+      <!-- Tarjeta del curso -->
+      <div class="tarjeta-curso" *ngIf="infoCurso">
+        <div class="cabecera-curso" [ngStyle]="{'background-image': 'url(' + infoCurso.imagen_curso + ')'}">
+          <div class="overlay-curso">
+            <h3 class="nombre-curso">{{ infoCurso.nombre_curso }}</h3>
+          </div>
+        </div>
+        <div class="cuerpo-curso">
+          <p class="descripcion-curso">{{ infoCurso.descripcion_curso }}</p>
+        </div>
+      </div>
+
+      <!-- Estadísticas rápidas -->
+      <div class="estadisticas-contenedor" *ngIf="cantidad_alumnos">
+        <div class="tarjeta-estadistica">
+          <div class="icono-estadistica estudiantes-icono">👨‍🎓</div>
+          <div class="datos-estadistica">
+            <h4 class="titulo-estadistica">Estudiantes</h4>
+            <p class="numero-estadistica">{{cantidad_alumnos}}</p>
+          </div>
+        </div>
+        
+        <div class="tarjeta-estadistica" *ngIf="cantidad_tareas">
+          <div class="icono-estadistica tareas-icono">📝</div>
+          <div class="datos-estadistica">
+            <h4 class="titulo-estadistica">Tareas</h4>
+            <p class="numero-estadistica">{{cantidad_tareas}}</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-estadistica" *ngIf="!cantidad_tareas">
+          <div class="icono-estadistica tareas-icono">📝</div>
+          <div class="datos-estadistica">
+            <h4 class="titulo-estadistica">Tareas</h4>
+            <p class="numero-estadistica">Sin tareas</p>
+          </div>
+        </div>
+        
+        <div class="tarjeta-estadistica">
+          <div class="icono-estadistica promedio-icono">📊</div>
+          <div class="datos-estadistica">
+            <h4 class="titulo-estadistica">Promedio</h4>
+            <p class="numero-estadistica">8.5</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actividad reciente -->
+      <div class="actividad-reciente" *ngIf="tareas.length">
+        <h3 class="titulo-actividad">Actividad Reciente</h3>
+        <ul class="lista-actividad">
+          <li class="item-actividad">
+            <div class="icono-actividad tarea-icono">📝</div>
+            <div class="detalle-actividad">
+              <p class="texto-actividad">Nueva tarea asignada: <strong>{{tareas[0].titulo_tarea}}</strong></p>
+              <p class="fecha-actividad">Hoy</p>
+            </div>
+          </li>
+          <li class="item-actividad">
+            <div class="icono-actividad mensaje-icono">💬</div>
+            <div class="detalle-actividad">
+              <p class="texto-actividad">Nuevo mensaje de: <strong>Coordinación Académica</strong></p>
+              <p class="fecha-actividad">Hace 1 semana</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <button class="boton-flotante-crear" (click)="rutaCrearTarea()">
+
+    <span class="icono-mas">+</span>
+    <span class="texto-flotante">Crear una nueva tarea</span>
+
+  </button>
+
+
+
+
+
+
+</div>

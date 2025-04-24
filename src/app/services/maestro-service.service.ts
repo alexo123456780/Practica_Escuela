@@ -5,8 +5,6 @@ import { map } from 'rxjs';
 import { MaestroResponse } from '../interfaces/maestro';
 import { MaestroCredenciales } from '../interfaces/maestro';
 import { environment } from '../../environments/environment';
-import { MaestroRegistro } from '../interfaces/maestro';
-
 
 @Injectable({
   providedIn: 'root'
@@ -81,11 +79,36 @@ export class MaestroServiceService {
 
       })
     )
+  }
+
+  actualizarDatosMaestro(id_maestro:number,datos:FormData):Observable<MaestroResponse>{
+
+    return this.http.post<MaestroResponse>(`${this.apiBase}/update-maestro/${id_maestro}`,datos).pipe(
+
+      map(response =>{
+
+        console.log('Datos actualizados correctamente',JSON.stringify({
+
+          status: response.status,
+          message: response.message,
+          code: response.code
+          
+        },null,2));
+
+        return response;
 
 
+      })
 
+    )
 
   }
+
+
+
+
+
+
 
 
 

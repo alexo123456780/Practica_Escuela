@@ -8,8 +8,6 @@ export interface Estudiante
     perfil_estudiante:string,
     created_at:string,
     updated_at:string
-
-
 }
 
 
