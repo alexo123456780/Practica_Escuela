@@ -32,7 +32,7 @@ export class DashboardMaestroComponent implements OnInit {
   cantidad_alumnos: number = 1;
   estudiantes: Estudiante[] = [];
   tareas:Tarea[] = [];
-  cantidad_tareas: number = 0;
+  cantidad_tareas: number = 1;
 
 
 
@@ -44,9 +44,6 @@ export class DashboardMaestroComponent implements OnInit {
   ngOnInit(): void {
 
     this.obtenerIdMaestroyCurso();
-    this.obtenerInfoEstudiantes();
-    this.obtenerinfoTareas();
-    
   }
 
 
@@ -73,6 +70,8 @@ export class DashboardMaestroComponent implements OnInit {
 
         this.obtenerInfoMaestro();
         this.obtenerInfoCurso();
+        this.obtenerInfoEstudiantes();
+        this.obtenerinfoTareas();
         
 
       }else{
@@ -215,6 +214,25 @@ export class DashboardMaestroComponent implements OnInit {
 
   rutaCrearTarea():void{
     this.router.navigate(['/crear-tarea']);
+  }
+
+  rutaActualizarPerfil():void{
+
+    this.router.navigate(['/editar-perfil'])
+  }
+
+
+  rutaEstudiantes():void{
+
+    this.router.navigate(['/ver-alumnos'])
+
+
+  }
+
+  rutaTareas():void{
+
+    this.router.navigate(['/ver-tareasm'])
+
   }
 
 

@@ -104,22 +104,50 @@ export class LoginEstudianteComponent {
 
           console.log('Navegando al menu del estudiante....');
 
-          /*setTimeout(() =>{
+          setTimeout(() =>{
 
+            this.router.navigate(['/dashboard-estudiante']);
 
-          })*/
+          },1400)
+
+        
         },
 
         error: (error) =>{
           this.estaCargando = false;
-          this.mensajeError = 'Credenciales invalidas intente de nuevo porfavor...'
-          console.log('Respuesta del backend',JSON.stringify(error,null,2));
 
-          setTimeout(() =>{
+          if(error.status === 400){
 
-            this.mensajeError = '';
+            this.mensajeError = 'credenciales invalidas intente de nuevo porfavor';
 
-          },1400)
+          }
+
+          else if(error.status === 500){
+
+            this.mensajeError = 'Se cayo el servidor espere unos momentos mientras corregimos los incovenientes';
+
+            
+          }else{
+
+            this.mensajeError = 'Error critico';
+
+          }
+
+
+          if(this.mensajeError){
+
+            setTimeout(() =>{
+
+              this.mensajeError = '';
+
+
+            },1400)
+          }
+
+          
+
+
+         
 
         }
       })

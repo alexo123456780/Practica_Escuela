@@ -28,7 +28,6 @@ export class CursoServiceService {
 
           status:response.status,
           message: response.message,
-          data:response.data,
           code:response.code
         },null,2))
 
@@ -55,10 +54,29 @@ export class CursoServiceService {
 
 
         return response;
+      })
+
+    )
+  }
+
+  obetenerTareasCurso(id_curso:number):Observable<CursoResponse>{
+
+    return this.http.get<CursoResponse>(`${this.apiBase}/mostrar-tareas-curso/${id_curso}`).pipe(
+
+      map(response =>{
+
+        console.log('Tareas del curso obtenidas correctamente',JSON.stringify({
+
+          status:response.status,
+          message:response.message,
+          code:response.code
+        },null,2))
+
+
+        return response;
 
 
       })
-
 
 
 
@@ -66,7 +84,11 @@ export class CursoServiceService {
 
 
 
+
   }
+
+
+
 
 
 

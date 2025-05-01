@@ -1,5 +1,3 @@
-import { Curso } from "./curso"
-
 export interface Maestro
 {
     id:number,
@@ -9,7 +7,7 @@ export interface Maestro
     numero_telefono:string,
     password:string,
     perfil_maestro:string,
-    curso_id:number
+    curso_id:number,
     created_at:string,
     updated_at:string
 
@@ -49,4 +47,10 @@ export interface MaestroRegistro{
     password: string,
     perfil_maestro: string
 
+}
+
+
+export interface MaestroPassword
+{
+    password:string
 }

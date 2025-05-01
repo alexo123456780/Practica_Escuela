@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { EstudianteListaResponse, EstudianteResponse } from '../interfaces/estudiante';
 import { EstudianteCredenciales } from '../interfaces/estudiante';
+import { EstudiantePassword } from '../interfaces/estudiante';
 
 @Injectable({
   providedIn: 'root'
@@ -78,14 +79,79 @@ export class EstudianteServiceService {
 
       })
 
-
-
     )
-
-
-
-
   }
+
+
+  obtenerInfoEstudiante(id_estudiante:number):Observable<EstudianteResponse>{
+
+    return this.http.get<EstudianteResponse>(`${this.apiBase}/verinfo-estudiante/${id_estudiante}`).pipe(
+
+      map(response =>{
+
+        console.log('Info del alumno traida correctamente',JSON.stringify({
+
+          status: response.status,
+          message:response.message,
+          code:response.code
+        },null,2))
+
+        return response;
+
+      })
+    )
+  }
+
+
+  actualizarInfoEstudiante(id_alumno:number ,datos:FormData):Observable<EstudianteResponse>{
+
+    return this.http.post<EstudianteResponse>(`${this.apiBase}/editar-perfil-estudiante/${id_alumno}`,datos).pipe(
+
+      map(response =>{
+
+        console.log('Informacion actualizada correctamente',JSON.stringify({
+          status:response.status,
+          message:response.message,
+          code:response.code
+
+        },null,3))
+
+        return response;
+      })
+    )
+  }
+
+  actualizarPassword(id_estudiante:number,password:EstudiantePassword):Observable<EstudianteResponse>{
+
+    return this.http.put<EstudianteResponse>(`${this.apiBase}/editar-password/${id_estudiante}`,password).pipe(
+
+      map(response =>{
+
+        console.log('password actualizado correctamente',JSON.stringify({
+
+          status:response.status,
+          message:response.message,
+          code:response.code
+        },null,3))
+
+        return response;
+      })
+    )
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

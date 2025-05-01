@@ -151,6 +151,15 @@ export class CrearTareaComponent  implements OnInit{
 
   }
 
+  rutaDashboard():void{
+    this.router.navigate(['/dashboard-maestro']);
+  }
+
+
+
+
+
+
 
 
 

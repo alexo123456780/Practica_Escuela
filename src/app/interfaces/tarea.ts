@@ -1,3 +1,5 @@
+import { Entrega } from "./entregas"
+
 export interface Tarea
 {
     id:number,
@@ -7,6 +9,7 @@ export interface Tarea
     status:boolean,
     curso_id:number,
     maestro_id:number,
+    entregas:Entrega[]
     created_at:string,
     updated_at:string
 

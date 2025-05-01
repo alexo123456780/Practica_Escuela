@@ -1,0 +1,37 @@
+body, html{
+
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+.container-global{
+
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, blue, red,green);
+    padding: 40px;
+}
+
+.diseno-boton-regresar{
+
+    align-items: center;
+    border-radius: 40px;
+    background: linear-gradient(136deg, blue,green);
+    border-color: blueviolet;
+    padding: 25px ;
+    cursor: pointer;
+    margin: 100px 4% ;
+    justify-content: center;
+    width: 30rem;
+    box-sizing: border-box;
+    box-shadow: rgba(0 0 0 0.2);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #ffffff;
+    font-size: 1rem;
+
+}

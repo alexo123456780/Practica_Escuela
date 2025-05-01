@@ -1,0 +1,314 @@
+.contenedor-info {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  max-width: 2000px;
+  margin-bottom: 30px;
+  padding: 30px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.titulo {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.cards {
+  background-color: white;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px 0;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cards:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.titulo-tarea {
+  color: #6a11cb;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 16px;
+  align-self: flex-start;
+  position: relative;
+}
+
+.titulo-tarea::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  border-radius: 3px;
+}
+
+.descripcion-curso {
+  margin-bottom: 16px;
+  line-height: 1.8;
+  color: #444;
+}
+
+.fecha {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.fecha::before {
+  content: '📅';
+  margin-right: 8px;
+}
+
+.btn-regresar {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.btn-regresar:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-entregar {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(106, 17, 203, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-entregar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(106, 17, 203, 0.4);
+}
+
+.btn-entregar:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 10px rgba(106, 17, 203, 0.2);
+}
+
+.btn-entregar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-entregar:hover::after {
+  transform: translateX(100%);
+}
+
+.mensaje-exito {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(220, 255, 220, 0.95);
+  color: #2e7d32;
+  border-left: 4px solid #2e7d32;
+  padding: 18px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.mensaje-exito::before {
+  content: '✅';
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+.mensaje-error {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(255, 235, 235, 0.95);
+  color: #d32f2f;
+  border-left: 4px solid #d32f2f;
+  padding: 18px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 5px 15px rgba(211, 47, 47, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.mensaje-error::before {
+  content: '❌';
+  margin-right: 12px;
+  font-size: 1.2rem;
+}
+
+.cargando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0;
+  color: white;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 25px;
+  }
+
+  .btn-regresar {
+    margin: 0;
+  }
+
+  .cards {
+    padding: 25px;
+    margin: 15px;
+    width: calc(100% - 30px);
+  }
+}
+
+@media (max-width: 600px) {
+  .contenedor-info {
+    padding: 15px;
+  }
+
+  .header {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .titulo {
+    font-size: 1.6rem;
+  }
+
+  .cards {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .titulo-tarea {
+    font-size: 1.3rem;
+  }
+
+  .btn-entregar {
+    align-self: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .btn-regresar {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.btn-subir{
+  align-self: flex-end;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(106, 17, 203, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  align-self: center;
+  width: 100%;
+  margin-top: 10px;
+  background-color: #2e7d32;
+
+  
+
+}

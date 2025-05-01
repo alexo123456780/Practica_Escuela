@@ -1,0 +1,248 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  /* Aquí estaba el error: faltaba el punto antes de fondo-animado */
+  .fondo-animado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #0033cc, #cc00ff, #ff0066, #ff9900);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    z-index: -1;
+  }
+  
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .titulo {
+    color: #0000dd;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.1rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .alerta {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .exito {
+    background-color: rgba(240, 255, 240, 0.9);
+    color: rgb(0, 128, 0);
+    border: 1px solid beige;
+  }
+  
+  .error {
+    background-color: rgba(255, 240, 240, 0.9);
+    color: red;
+    border: 1px solid palevioletred;
+  }
+  
+  .cargando {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(63, 81, 181, 0.2);
+    border-radius: 50%;
+    border-top-color: blue;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .tareas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .tarea-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .tarea-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .tarea-header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 15px;
+    position: relative;
+  }
+  
+  .tarea-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+  }
+  
+  .fecha {
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+  
+  .tarea-body {
+    padding: 15px;
+    min-height: 100px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .tarea-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: rgba(245, 245, 245, 0.9);
+  }
+  
+  /* Botones */
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-editar {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  .btn-editar:hover {
+    background-color: #303f9f;
+  }
+  
+  .btn-ver-entregas {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .btn-ver-entregas:hover {
+    background-color: #388e3c;
+  }
+  
+  .btn-crear {
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  .btn-crear:hover {
+    background-color: #f57c00;
+  }
+  
+  /* Mensaje de no tareas */
+  .no-tareas {
+    text-align: center;
+    margin: 50px 0;
+    padding: 30px;
+    background-color: rgba(245, 245, 245, 0.9);
+    border-radius: 8px;
+  }
+  
+  .no-tareas p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Botón flotante */
+  .btn-flotante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+  }
+  
+  .btn-crear-flotante {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ff9800;
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-crear-flotante:hover {
+    background-color: #f57c00;
+    transform: scale(1.1);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .tareas-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .titulo {
+      font-size: 1.8rem;
+    }
+  }

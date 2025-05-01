@@ -1,1 +1,205 @@
-<p>estudiante-dashboard works!</p>
+<div class="dashboard-container">
+  <!-- Partículas de fondo -->
+  <div class="particles-container">
+    <div class="particle" *ngFor="let particle of [].constructor(20); let i = index"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="header-container">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <span>E</span>
+          <div class="logo-icon-secondary">
+            <span>V</span>
+          </div>
+        </div>
+        <h1 class="app-title">Escuela<span>Virtual</span></h1>
+      </div>
+
+      <div class="header-actions">
+        <button class="logout-button" (click)="cerrarSesion()">
+          <span>Cerrar Sesión</span>
+          <i class="logout-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V7.414l-5-5H3zm7 5a1 1 0 10-2 0v4.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L12 12.586V8z" clip-rule="evenodd" />
+            </svg>
+          </i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <!-- Panel lateral -->
+    <aside class="sidebar">
+      <div class="profile-card" (click)="rutaActualizarDatos()">
+        <div class="profile-header">
+          <div class="profile-header-bg"></div>
+          <div class="profile-header-bg-overlay"></div>
+          
+          <div class="profile-image-container">
+            <img *ngIf="estudiante?.perfil_estudiante" [src]="estudiante?.perfil_estudiante" alt="Foto de perfil" class="profile-image">
+            <div *ngIf="!estudiante?.perfil_estudiante" class="profile-image-placeholder">
+              {{ estudiante?.nombre_estudiante?.charAt(0) }}{{ estudiante?.apellido?.charAt(0) }}
+            </div>
+            
+            <div class="edit-profile-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <div class="profile-content">
+          <h2 class="profile-name">{{ estudiante?.nombre_estudiante }} {{ estudiante?.apellido }}</h2>
+          <p class="profile-matricula">Matrícula: {{ estudiante?.matricula }}</p>
+          
+          <div class="profile-menu">
+            <div class="menu-item">
+              <div class="menu-icon menu-icon-courses">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="menu-title">Mis Cursos</h3>
+                <p class="menu-subtitle">{{ cursos.length }} cursos activos</p>
+              </div>
+            </div>
+            
+            <div class="menu-item" (click)="rutaActualizarPassword()">
+              <div class="menu-icon menu-icon-tasks">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="menu-title">Cambiar Password</h3>
+                <p class="menu-subtitle">Actualiza tu password</p>
+              </div>
+            </div>
+            
+            <div class="menu-item">
+              <div class="menu-icon menu-icon-announcements">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="menu-title">Anuncios</h3>
+                <p class="menu-subtitle">3 nuevos anuncios</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Contenido principal - Cursos -->
+    <section class="main-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-title-indicator"></span>
+          Bienvenido, {{ estudiante?.nombre_estudiante }}
+        </h2>
+        
+      </div>
+
+      <div class="courses-grid">
+        <div *ngFor="let curso of cursos" class="course-card">
+          <div class="course-image-container">
+            <img [src]="curso.imagen_curso" [alt]="curso.nombre_curso" class="course-image">
+            <div class="course-image-overlay"></div>
+            <div class="course-info">
+              <h3 class="course-title">{{ curso.nombre_curso }}</h3>
+              <p class="course-teacher">Prof. {{ curso.maestro.nombre_maestro }} {{ curso.maestro.apellido }}</p>
+            </div>
+          </div>
+          
+          <div class="course-content">
+            <p class="course-description">{{ curso.descripcion_curso }}</p>
+            
+            <div class="course-footer">
+              <div class="course-status">
+                <div class="status-indicator"></div>
+                <span class="status-text">Curso activo</span>
+              </div>
+              
+              <button class="view-tasks-button" (click)="obtenerIdCurso(curso.id)">
+                <span>Ver Tareas</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de actividad reciente -->
+      <div class="recent-activity">
+        <h3 class="activity-title">
+          <span class="activity-title-indicator"></span>
+          Actividad Reciente
+        </h3>
+        
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <h4 class="activity-name">Nueva tarea asignada</h4>
+                <span class="activity-time">Hace 1 hora</span>
+              </div>
+              <p class="activity-description">El profesor ha asignado una nueva tarea en Matemáticas Avanzadas</p>
+            </div>
+          </div>
+          
+          <div class="activity-item">
+            <div class="activity-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <h4 class="activity-name">Calificación publicada</h4>
+                <span class="activity-time">Hace 2 horas</span>
+              </div>
+              <p class="activity-description">Tu tarea 'Proyecto Final' ha sido calificada con 95/100</p>
+            </div>
+          </div>
+          
+          <div class="activity-item">
+            <div class="activity-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-header">
+                <h4 class="activity-name">Material de estudio actualizado</h4>
+                <span class="activity-time">Hace 3 horas</span>
+              </div>
+              <p class="activity-description">Se ha añadido nuevo material de estudio en Programación Web</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Botón flotante -->
+  <button class="floating-button">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+    </svg>
+  </button>
+</div>

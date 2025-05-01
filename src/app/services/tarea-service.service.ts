@@ -86,6 +86,83 @@ export class TareaServiceService {
     )
   }
 
+
+  entregarTarea(id_alumno:number,datos:FormData):Observable<TareaResponse>{
+
+    return this.http.post<TareaResponse>(`${this.apiBase}/entrega-alumno/${id_alumno}`,datos).pipe(
+
+      map(response =>{
+
+        console.log('Tarea enviada correctamente:',JSON.stringify({
+
+          status:response.status,
+          message:response.message,
+          code: response.code
+
+        },null,3))
+
+        return response;
+
+
+      })
+
+    )
+
+  }
+
+
+
+  obtenerIdEstudiante():number| null{
+
+    const datosEstudiante = localStorage.getItem('estudiante');
+
+    if(datosEstudiante){
+
+      const info = JSON.parse(datosEstudiante);
+
+      if(info && typeof info.id === 'number'){
+
+        return Number(info.id);
+      }
+
+    }
+
+    return null;
+
+  }
+
+
+  obtenerTareasEntrega(id_tarea:number):Observable<TareaResponse>{
+
+    return this.http.get<TareaResponse>(`${this.apiBase}/ver-entrega-todoA/${id_tarea}`).pipe(
+
+      map(response =>{
+
+        console.log('Entregas traidas correctamente',JSON.stringify({
+
+          status:response.status,
+          message:response.message,
+          code:response.code
+        },null,3))
+
+        return response;
+      })
+
+    )
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 

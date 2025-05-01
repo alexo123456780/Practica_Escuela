@@ -15,7 +15,7 @@
 .bg-gradient-to-br {
     background-size: 300% 300%;
     animation: gradientAnimation 12s ease infinite;
-    background-image: linear-gradient(135deg, #f91616, #50ec48, #6d0bf5, #a0e11d);
+    background-image: linear-gradient(135deg, #161df9d0, #ec48ce, #6d0bf5, #a0e11d);
   }
   
   @keyframes gradientAnimation {

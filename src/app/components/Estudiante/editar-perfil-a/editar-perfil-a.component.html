@@ -1,0 +1,141 @@
+<div class="contenedor-editar">
+  <div class="w-full max-w-4xl mb-4">
+    <div *ngIf="mensajeError" class="message message-error">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ mensajeError }}</span>
+    </div>
+    
+    <div *ngIf="mensajeExito" class="message message-success">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ mensajeExito }}</span>
+    </div>
+  </div>
+
+  <div class="header">
+    <h2 class="texto">Edita tu Perfil</h2>
+    <div class="header-line"></div>
+  </div>
+
+  <div class="form-container">
+    <div class="form-header">
+      <h3>Información Personal</h3>
+      <p>Actualiza tus datos personales y foto de perfil</p>
+    </div>
+    
+    <form [formGroup]="formulario_perfil" (ngSubmit)="alertaModal()" class="form-content">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div>
+          <div class="input-group">
+            <label for="username" class="input-label">Nombre Estudiante</label>
+            <input 
+              id="username" 
+              type="text" 
+              formControlName="nombre_estudiante"
+              class="input-field"
+              placeholder="Tu nombre">
+          </div>
+          
+          <div class="input-group">
+            <label for="apellido" class="input-label">Apellido</label>
+            <input 
+              id="apellido" 
+              type="text" 
+              formControlName="apellido"
+              class="input-field"
+              placeholder="Tu apellido">
+          </div>
+        </div>
+        
+        <div class="flex flex-col items-center justify-center">
+          <div class="profile-image-container">
+            <div class="profile-image">
+              <img *ngIf="imagen_preview" [src]="imagen_preview" alt="Vista previa" class="h-full w-full object-cover">
+              <svg *ngIf="!imagen_preview" xmlns="http://www.w3.org/2000/svg" class="profile-image-placeholder" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <button 
+              type="button" 
+              class="profile-image-button"
+              (click)="fileInput.click()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </button>
+            <input 
+              #fileInput
+              id="perfil_estudiante" 
+              type="file" 
+              accept="image/*" 
+              (change)="obtenerImagendelPerfil($event)" 
+              class="hidden" />
+          </div>
+          <p class="mt-3 text-sm text-gray-500">JPG, PNG o JPEG (máx. 2MB)</p>
+        </div>
+      </div>
+      
+      <div class="button-container">
+        <button 
+          type="button" 
+          class="button-cancel"
+          (click)="rutaDashboard()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Cancelar
+        </button>
+        <button 
+          type="submit" 
+          class="button-submit"
+          [disabled]="estaCargando">
+          <ng-container *ngIf="estaCargando; else submitText">
+            <div class="spinner" style="width: 20px; height: 20px;">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
+            <span>Actualizando...</span>
+          </ng-container>
+          <ng-template #submitText>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            Actualizar Datos
+          </ng-template>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="mostrarModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-icon-container">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="modal-title">Confirmar cambios</h3>
+      </div>
+      <div class="modal-content">
+        <p class="modal-text">¿Estás seguro de que quieres actualizar tu perfil? Este proceso no puede ser cancelado una vez iniciado.</p>
+        <div class="modal-buttons">
+          <button 
+            class="modal-button-cancel"
+            (click)="mostrarModal=false">
+            Cancelar
+          </button>
+          <button 
+            class="modal-button-confirm"
+            (click)="confirmarModal()">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="fondo-animado">
+<div class="container-principal">
+<div class="container">
+
+    <h1 class="titulo">Tareas del Curso</h1>
+
+    <div *ngIf="mensajeExito" class="alerta exito">
+        <span>{{mensajeExito}}</span>
+    </div>
+
+    <div *ngIf="mensajeError" class="alerta error">
+
+        <span>{{mensajeError}}</span>
+    </div>
+
+
+    <div *ngIf="estaCargando" class="cargando">
+
+        <div class="spinner"></div>
+        <span>Cargando las tareas.....</span>
+
+    </div>
+
+
+    <div *ngIf="!estaCargando && tareas.length > 0" class="tareas-container">
+
+        <div *ngFor="let tarea of tareas" class="tarea-card">
+
+            <div class="tarea-header">
+
+                <h2>{{tarea.titulo_tarea}}</h2>
+
+                <span class="fecha">
+
+                    Fecha Limite de Entrega: {{tarea.fecha_vencimiento | date:'dd/MM/yyyy'}}
+
+                </span>
+
+            </div>
+
+            <div class="tarea-body">
+
+                <p>{{tarea.instrucciones}}</p>
+            </div>
+
+            <div class="tarea-footer">
+
+                <button class="btn-editar">
+                    Editar
+                </button>
+
+                <button class="btn-ver-entregas">
+
+                    Ver entrega de alumnos
+
+                </button>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div *ngIf="!estaCargando && tareas.length === 0" class="no-tareas">
+
+        <p>No has asignado ninguna tarea</p>
+
+        <button class="btn-crear" (click)="rutaCreartareas()">
+            Crear una Tarea
+        </button>
+
+    </div>
+
+
+   
+
+</div>
+
+</div>
+
+</div>

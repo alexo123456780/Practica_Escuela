@@ -1,0 +1,53 @@
+<div class="container-final">
+    <header class="cabecera-titulo">
+        <div class="logo-contenedor">
+            <h3 class="titulo-principal">Gestión de Estudiantes</h3>
+        </div>
+        <div class="buscador-container">
+            <button class="btn-buscar"><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <div class="contenido-principal">
+        <!-- Mensaje de carga -->
+        <div *ngIf="estaCargando" class="mensaje-info">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Cargando estudiantes...</p>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div *ngIf="mensajeError" class="mensaje-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>{{ mensajeError }}</p>
+        </div>
+
+        <!-- Sin resultados -->
+        <div *ngIf="!estaCargando && !mensajeError && estudiantes.length === 0" class="mensaje-info">
+            <i class="fas fa-info-circle"></i>
+            <p>No se encontraron estudiantes</p>
+        </div>
+
+        <!-- Lista de alumnos -->
+        <div *ngIf="!estaCargando && !mensajeError && estudiantes.length > 0" class="lista-alumnos">
+            <div class="tarjeta-alumno" *ngFor="let alumno of estudiantes">
+                <div class="foto-perfil">
+                    <img [src]="alumno.perfil_estudiante" alt="Foto de perfil">
+                </div>
+                <div class="info-alumno">
+                    <h4 class="nombre-alumno">{{ alumno.nombre_estudiante}} {{ alumno.apellido}}</h4>
+                    <p class="matricula"><strong>Matrícula:</strong> {{ alumno.matricula }}</p>
+                    <p class="correo"><i class="fas fa-envelope"></i> {{ alumno.matricula }}</p>
+                </div>
+                <div class="acciones-alumno">
+                    <button class="btn-ver" >
+                        <i class="fas fa-eye"></i> Ver detalles
+                    </button>
+                    <button class="btn-editar">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

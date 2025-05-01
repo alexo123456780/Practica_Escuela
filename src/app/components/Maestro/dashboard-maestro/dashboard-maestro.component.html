@@ -24,7 +24,7 @@
   <main class="contenido-principal">
     <!-- Panel lateral con información del maestro -->
     <aside class="panel-lateral">
-      <div class="tarjeta-perfil">
+      <div class="tarjeta-perfil" (click)="rutaActualizarPerfil()">
         <!-- Foto del maestro -->
         <div class="contenedor-foto">
           <img *ngIf="infoMaestro?.perfil_maestro" [src]="infoMaestro?.perfil_maestro" alt="Foto de perfil" class="foto-perfil">
@@ -40,16 +40,13 @@
           <p class="telefono-maestro">Teléfono: {{ infoMaestro?.numero_telefono }}</p>
         </div>
       </div>
-
-
-    
       <!-- Menú de navegación -->
       
     </aside>
 
     <!-- Sección principal con información del curso -->
     <section class="seccion-curso">
-      <h2 class="titulo-seccion">Información del Curso</h2>
+      <h2 class="titulo-seccion">Bienvenido(a) {{infoMaestro?.nombre_maestro}}</h2>
       
       <!-- Tarjeta del curso -->
       <div class="tarjeta-curso" *ngIf="infoCurso">
@@ -64,36 +61,30 @@
       </div>
 
       <!-- Estadísticas rápidas -->
-      <div class="estadisticas-contenedor" *ngIf="cantidad_alumnos">
-        <div class="tarjeta-estadistica">
+      <div class="estadisticas-contenedor">
+        <div class="tarjeta-estadistica" (click)="rutaEstudiantes()">
           <div class="icono-estadistica estudiantes-icono">👨‍🎓</div>
           <div class="datos-estadistica">
             <h4 class="titulo-estadistica">Estudiantes</h4>
-            <p class="numero-estadistica">{{cantidad_alumnos}}</p>
-          </div>
-        </div>
-        
-        <div class="tarjeta-estadistica" *ngIf="cantidad_tareas">
-          <div class="icono-estadistica tareas-icono">📝</div>
-          <div class="datos-estadistica">
-            <h4 class="titulo-estadistica">Tareas</h4>
-            <p class="numero-estadistica">{{cantidad_tareas}}</p>
+            <p class="numero-estadistica" *ngIf="!cantidad_alumnos">Sin estudiantes en el curso</p>
+            <p class="numero-estadistica" *ngIf="cantidad_alumnos">{{cantidad_alumnos}}</p>
           </div>
         </div>
 
-        <div class="tarjeta-estadistica" *ngIf="!cantidad_tareas">
+        <div class="tarjeta-estadistica">
           <div class="icono-estadistica tareas-icono">📝</div>
-          <div class="datos-estadistica">
+          <div class="datos-estadistica" (click)="rutaTareas()">
             <h4 class="titulo-estadistica">Tareas</h4>
-            <p class="numero-estadistica">Sin tareas</p>
+            <p class="numero-estadistica" *ngIf="!cantidad_tareas">No hay Tareas Asignadas aun</p>
+            <p class="numero-estadistica" *ngIf="cantidad_tareas">{{cantidad_tareas}}</p>
           </div>
         </div>
-        
+
         <div class="tarjeta-estadistica">
           <div class="icono-estadistica promedio-icono">📊</div>
           <div class="datos-estadistica">
-            <h4 class="titulo-estadistica">Promedio</h4>
-            <p class="numero-estadistica">8.5</p>
+            <h4 class="titulo-estadistica">Asignar Calificacion</h4>
+            <p class="numero-estadistica">Parciales</p>
           </div>
         </div>
       </div>
@@ -127,10 +118,6 @@
     <span class="texto-flotante">Crear una nueva tarea</span>
 
   </button>
-
-
-
-
 
 
 </div>

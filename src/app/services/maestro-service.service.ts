@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs';
-import { MaestroResponse } from '../interfaces/maestro';
+import { MaestroListaResponse, MaestroResponse } from '../interfaces/maestro';
 import { MaestroCredenciales } from '../interfaces/maestro';
 import { environment } from '../../environments/environment';
+import { MaestroPassword } from '../interfaces/maestro';
 
 @Injectable({
   providedIn: 'root'
@@ -104,6 +105,46 @@ export class MaestroServiceService {
 
   }
 
+
+  actualizarPasswordMaestro(id_maestro:number, password:MaestroPassword):Observable<MaestroResponse>{
+
+    return this.http.put<MaestroResponse>(`${this.apiBase}/actualizar-password/${id_maestro}`,password).pipe(
+
+      map(response =>{
+
+        console.log('password actualizado correctamente:JSON->',JSON.stringify({
+
+          status:response.status,
+          message:response.message,
+          code:response.code
+        },null,2))
+
+        return response;
+
+      })
+    )
+
+  }
+
+
+  verTodosMaestros():Observable<MaestroListaResponse>{
+
+    return this.http.get<MaestroListaResponse>(`${this.apiBase}/ver-todos-maestros`).pipe(
+
+      map(response =>{
+
+        console.log('Peticion exitosa:',JSON.stringify({
+
+          status:response.status,
+          message:response.message,
+          code:response.code
+
+        },null,3))
+
+        return response;
+      }) 
+    )
+  }
 
 
 

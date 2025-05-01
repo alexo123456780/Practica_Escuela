@@ -36,3 +36,9 @@ export interface EstudianteCredenciales
     matricula:string,
     password:string,
 }
+
+export interface EstudiantePassword
+{
+    password:string
+
+}

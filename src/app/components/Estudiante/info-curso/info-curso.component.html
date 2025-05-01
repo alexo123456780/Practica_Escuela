@@ -1,0 +1,56 @@
+<div class="contenedor-info">
+
+    <div class="mensaje-exito" *ngIf="mensajeExito">
+
+        <span>{{mensajeExito}}</span>
+    </div>
+
+
+    <div class="mensaje-error" *ngIf="mensajeError">
+
+        <span>{{mensajeError}}</span>
+
+    </div>
+
+
+    <div *ngIf="estaCargando" class="cargando">
+
+        <div class="spinner"></div>
+        <span>Cargando las tareas.....</span>
+
+    </div>
+
+
+
+    <div class="header">
+
+        <h2 class="titulo" *ngIf="curso">Tareas del curso {{curso.nombre_curso}}</h2>
+
+        <button class="btn-regresar"(click)="rutaDashboard()">Regresar</button>
+
+
+    </div>
+
+
+
+    <div class="cards" *ngFor="let tarea of tareas_curso">
+
+        <h2 class="titulo-tarea">{{tarea.titulo_tarea}}: </h2>
+
+        <p class="descripcion-curso"><strong>Instrucciones</strong>:  {{tarea.instrucciones}}</p>
+
+        <p class="fecha"><strong>Fecha  de vencimiento:  </strong>  {{tarea.fecha_vencimiento | date: 'dd/MM/yyyy'}}</p>
+
+    
+        <button class="btn-entregar" (click)="obtenerIdTarea(tarea.id)">Entregar Tarea</button>
+
+        <div *ngIf="id_tarea === tarea.id" class="formulario-entrega">
+            <input type="file" (change)="recibirArchivo($event)" />
+            <button (click)="enviarTarea()" class="btn-subir">Subir Tarea</button>
+            <div *ngIf="imagen_preview">
+              <img [src]="imagen_preview" width="200" />
+            </div>
+
+    </div>
+
+</div>

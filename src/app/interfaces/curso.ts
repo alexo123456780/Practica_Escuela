@@ -1,3 +1,6 @@
+import { Maestro } from "./maestro"
+import { Tarea } from "./tarea"
+
 export interface Curso
 {
     id:number,
@@ -6,6 +9,8 @@ export interface Curso
     imagen_curso:string,
     created_at:string,
     updated_at:string
+    maestro: Maestro,
+    tareas: Tarea[],
 
 }
 
